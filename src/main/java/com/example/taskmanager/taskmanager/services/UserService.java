@@ -1,5 +1,7 @@
 package com.example.taskmanager.taskmanager.services;
 
+import java.util.List;
+
 import com.example.taskmanager.taskmanager.model.Developer;
 import com.example.taskmanager.taskmanager.model.Manager;
 import com.example.taskmanager.taskmanager.model.Stakeholder;
@@ -28,8 +30,22 @@ public class UserService {
     private ManagerRepository managerRepo;
 
 
-    public void saveUser(User user){
-       repo.save(user);
+    public void saveUser(List<User> users){
+        for (User user : users) {
+            if(user instanceof Stakeholder){
+                System.out.println("stake");
+                holderRepo.save((Stakeholder)user);
+            }
+            if(user instanceof Developer){
+                System.out.println("DEV");
+                devRepo.save((Developer)user);
+            }
+            if(user instanceof Manager){
+                System.out.println("Manager");
+                managerRepo.save((Manager)user);
+            }
+            break;
+        }
     }
 
     public User findUser(String email,String password){
@@ -40,14 +56,20 @@ public class UserService {
 
         Manager manager = managerRepo.findByEmailAndPassword(email, password);
 
-        if(dev != null)
+        if(dev != null){
+            System.out.println("DEV");
             return dev;
+        }
 
-        if(stake != null)
+        if(stake != null){
+            System.out.println("Stake");
             return stake;
+        }
         
-        if(manager != null)
+        if(manager != null){
+            System.out.println("Manager");
             return manager;
+        }
         
         return null;
     }

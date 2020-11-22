@@ -39,7 +39,7 @@
 
                         </span>
                         <div id="developer" hidden class="card-content">
-                            <form th:action="@{/signUp}" th:object="${user}" method="POST">
+                            <form th:action="@{/signUp}" th:object="${dev}" method="POST">
 
                                 <h1>DEV</h1>
                                 <div class="input-field ">
@@ -75,7 +75,7 @@
                             </form>
                         </div>
                         <div id="manager" hidden class="card-content">
-                            <form th:action="@{/signUp}" th:object="${user}" method="POST">
+                            <form th:action="@{/signUp}" th:object="${manager}" method="POST">
 
                                 <h1>MANAGER</h1>
                                 <div class="input-field ">
@@ -111,7 +111,7 @@
                             </form>
                         </div>
                         <div id="stakeholder" hidden class="card-content">
-                            <form th:action="@{/signUp}" th:object="${user}" method="POST">
+                            <form th:action="@{/signUp}" th:object="${stake}" method="POST">
                                 <h1>STAKEHOLDEr</h1>
                                 <div class="input-field ">
                                     <input placeholder="nome" th:field="*{nome}" id="nome" type="text" class="validate" required>

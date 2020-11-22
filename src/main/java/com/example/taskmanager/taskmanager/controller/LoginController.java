@@ -1,11 +1,16 @@
 package com.example.taskmanager.taskmanager.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.example.taskmanager.taskmanager.model.Developer;
+import com.example.taskmanager.taskmanager.model.Manager;
+import com.example.taskmanager.taskmanager.model.Stakeholder;
 import com.example.taskmanager.taskmanager.model.User;
 import com.example.taskmanager.taskmanager.services.UserService;
 
@@ -25,34 +30,43 @@ public class LoginController {
     private UserService service;
     
     @GetMapping
-    public String init(Model model, @ModelAttribute User user){
-        model.addAttribute("user",user);
+    public String init(Model model){
+        model.addAttribute("user",new User());
         return "index";
     }
 
     @PostMapping("/signUp")
-    public String login(Model model, @ModelAttribute User user){
+    public String login(Model model, @ModelAttribute User user, @ModelAttribute Developer dev, @ModelAttribute Manager manager, @ModelAttribute Stakeholder stake){
         System.out.println(user.toString());
-
-        service.saveUser(user);
+        List<User> objects = new ArrayList<User>();
+        objects.add(dev);
+        objects.add(manager);
+        objects.add(stake);
+        
+        service.saveUser(objects);
 
         return "index";
     }
 
     @GetMapping("/signUp")
     public String signUp(Model model , @ModelAttribute User user){
-        model.addAttribute("user", user);
+        model.addAttribute("dev", new Developer());
+        model.addAttribute("stake", new Stakeholder());
+        model.addAttribute("manager", new Manager());
         return "/signUp/signUp";
     }
 
     @PostMapping("/login")
     public String postMethodName(@ModelAttribute User user) {
         //TODO: process POST request
+        System.out.println(user.toString());
         User repoUser = service.findUser(user.getEmail(), user.getPassword());
         if(repoUser == null){
             return "index";
-        }else
+        }else{
+            
             return "/mainMenu/menu";
+        }
     }
     
 

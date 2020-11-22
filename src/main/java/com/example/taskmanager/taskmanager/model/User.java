@@ -46,11 +46,6 @@ public class User {
     @NonNull
     String num_contacto;
 
-
-    @Column
-    private String typeUser;
-
-
     
     public User() {
     }
@@ -78,18 +73,6 @@ public class User {
         this.num_contacto = num_contacto;
     }
 
-    public String getTypeUser() {
-        return this.typeUser;
-    }
-
-    public void setTypeUser(String typeUser) {
-        this.typeUser = typeUser;
-    }
-
-    public User typeUser(String typeUser) {
-        this.typeUser = typeUser;
-        return this;
-    }
 
 
     public String getPassword() {
