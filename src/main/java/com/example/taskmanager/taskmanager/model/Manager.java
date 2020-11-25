@@ -24,18 +24,6 @@ public class Manager extends User {
         super(nome, apelido, email, num_contacto);
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Developer)) {
-            return false;
-        }
-        Manager manager = (Manager) o;
-        return getId() == manager.getId();
-    }
-
     @Override
     public int hashCode() {
         return Objects.hashCode(getId());

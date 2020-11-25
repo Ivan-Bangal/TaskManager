@@ -20,19 +20,6 @@ public class Stakeholder extends User {
         super(nome, apelido, email, num_contacto);
     }
 
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Developer)) {
-            return false;
-        }
-        Stakeholder stakeholder = (Stakeholder) o;
-        return getId() == stakeholder.getId();
-    }
-
     @Override
     public int hashCode() {
         return Objects.hashCode(getId());

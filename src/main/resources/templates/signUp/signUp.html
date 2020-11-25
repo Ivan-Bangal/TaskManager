@@ -39,7 +39,7 @@
 
                         </span>
                         <div id="developer" hidden class="card-content">
-                            <form th:action="@{/signUp}" th:object="${dev}" method="POST">
+                            <form th:action="@{/signUpD}" th:object="${dev}" method="POST">
 
                                 <h1>DEV</h1>
                                 <div class="input-field ">
@@ -75,7 +75,7 @@
                             </form>
                         </div>
                         <div id="manager" hidden class="card-content">
-                            <form th:action="@{/signUp}" th:object="${manager}" method="POST">
+                            <form th:action="@{/signUpM}" th:object="${manager}" method="POST">
 
                                 <h1>MANAGER</h1>
                                 <div class="input-field ">
@@ -111,8 +111,8 @@
                             </form>
                         </div>
                         <div id="stakeholder" hidden class="card-content">
-                            <form th:action="@{/signUp}" th:object="${stake}" method="POST">
-                                <h1>STAKEHOLDEr</h1>
+                            <form th:action="@{/signUpS}" th:object="${stakeholder}" method="POST">
+                                <h1>STAKEHOLDER</h1>
                                 <div class="input-field ">
                                     <input placeholder="nome" th:field="*{nome}" id="nome" type="text" class="validate" required>
                                     <label for="nome">Nome</label>
@@ -176,9 +176,7 @@
             $("#typeUser").change(function(){
                 var selectedUser = $('#typeUser').find(":selected").text().toLowerCase();
                 var types = ['stakeholder','manager','developer'];
-                alert("You have selected the country - " + selectedUser);
-                
-                
+                     
                 for(x in types ){
 
                     if(types[x] === selectedUser){

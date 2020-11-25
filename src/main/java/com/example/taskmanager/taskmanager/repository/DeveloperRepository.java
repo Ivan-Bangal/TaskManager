@@ -17,4 +17,6 @@ public interface DeveloperRepository extends CrudRepository<Developer,Long> {
     Developer findByEmail(String email);
 
     Developer findByEmailAndPassword(String email,String password);
+
+    
 }

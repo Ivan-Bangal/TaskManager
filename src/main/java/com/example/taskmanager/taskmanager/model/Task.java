@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
 
 @Entity
@@ -30,10 +31,12 @@ public class Task {
 
     @Column
     @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data_inicio;
 
     @Column
     @NonNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
     @Column

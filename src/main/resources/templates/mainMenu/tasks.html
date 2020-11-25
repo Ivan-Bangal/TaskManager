@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <!--===============================================================================================-->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+
+    <style>
+        .section {
+            height: 400px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Side Nav Begin  -->
+
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <!-- Will Ask AB -->
+                    <img th:src="@{/images/office.jpg}">
+                </div>
+                <!-- User Profile Img -->
+                <a href="#user"><img class="circle" th:src="@{/images/user.png}"></a>
+                <a href="#name"><span class="white-text name">
+                        <p th:text='${loggedUser.nome  +" "+ loggedUser.apelido}'></p>
+                    </span></a>
+                <a href="#email"><span class="white-text email" th:text="${job}">jdandturk@gmail.com</span></a>
+            </div>
+        </li>
+        <li><a th:href="@{/main}"><i class="material-icons">cloud</i>HOME</a></li>
+        <li><a th:href="@{/main/tasks}">TASKS</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Relatorios</a></li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger btn-floating pulse"><i
+            class="material-icons">menu</i></a>
+
+    <!-- Side Nav End -->
+
+
+    <div class="container">
+        <a class="btn-floating btn-large waves-effect waves-light red" th:href="@{/main/task/create}"><i
+                class="material-icons">add</i></a>
+        <table class="highlight responsive-table centered">
+            <thead>
+                <tr>
+                    <th>
+                        <!-- Imagem -->
+                    </th>
+                    <th>
+                        Descricao-Tarefa
+                    </th>
+                    <th>
+                        Estado-Tarefa
+                    </th>
+                    <th>
+                        DataInicio-Tarefa
+                    </th>
+                    <th>
+                        DeadLine-Tarefa
+                    </th>
+                    <th>
+                        Editar
+                    </th>
+                    <th>
+                        Apagar
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr th:each=" task : ${tasks}">
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <p th:text="${task.descricao}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${task.estadoAtual}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${task.data_inicio}"></p>
+                    </td>
+                    <td>
+                        <p th:text="${task.deadline}"></p>
+                    </td>
+                    <td th:if='${job == "Manager" || job == "Developer"}'>
+                        <a class="btn-floating btn-large waves-effect waves-light red"
+                            th:href="@{/main/edit/task/__${task.id}__}"><i class="material-icons">create</i></a>
+                    </td>
+                    <td th:if='${job == "Manager"}'>
+                        <a class="btn-floating btn-large waves-effect waves-light red"
+                            th:href="@{/main/delete/task/__${task.id}__}"><i
+                                class="material-icons">close</i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+    <!--===============================================================================================-->
+
+    <script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.parallax').parallax();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {
+                draggable: true
+            });
+        });
+
+        // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+        // var collapsibleElem = document.querySelector('.collapsible');
+        // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+
+        // Or with jQuery
+
+    </script>
+
+</body>
+
+</html>

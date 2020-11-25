@@ -12,7 +12,7 @@
     <style>
         .section {
             height: 400px;
-          }
+        }
     </style>
 
 </head>
@@ -25,29 +25,142 @@
             <div class="user-view">
                 <div class="background">
                     <!-- Will Ask AB -->
-                    <img src="images/office.jpg">
+                    <img  th:src="@{/images/office.jpg}">
                 </div>
                 <!-- User Profile Img -->
-                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-                <a href="#name"><span class="white-text name">John Doe</span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                <a href="#user"><img class="circle" th:src="@{/images/user.png}"></a>
+                <a href="#name"><span class="white-text name"><p th:text='${loggedUser.nome  +" "+ loggedUser.apelido}'></p></span></a>
+                <a href="#email"><span class="white-text email" th:text="${job}">jdandturk@gmail.com</span></a>
             </div>
         </li>
-        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-        <li><a href="#!">Second Link</a></li>
+        <li><a th:href="@{/main}"><i class="material-icons">cloud</i>HOME</a></li>
+        <li><a th:href="@{/main/tasks}">TASKS</a></li>
         <li>
             <div class="divider"></div>
         </li>
         <li><a class="subheader">Subheader</a></li>
-        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+        <li><a class="waves-effect" href="#!">Relatorios</a></li>
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <a href="#" data-target="slide-out" class="sidenav-trigger btn-floating pulse"><i
+            class="material-icons">menu</i></a>
 
 
 
     <!-- Side Nav End -->
     <div class="container">
-        
+        <div class="row">
+            <div class="section">
+                <table class="highlight responsive-table centered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <!-- Imagem -->
+                            </th>
+                            <th>
+                                Nome
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Editar
+                            </th>
+                            <th>
+                                Apagar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each=" user : ${users}">
+                            <td>
+
+                            </td>
+                            <td>
+                                <p th:text="${user.nome}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${user.email}"></p>
+                            </td>
+                            <td th:if='${job == "Manager"}'>
+                                <a class="btn-floating btn-large waves-effect waves-light red"
+                                    th:href="@{/main/edit/user/__${user.email}__}"><i
+                                        class="material-icons">create</i></a>
+
+                            </td>
+                            <td th:if='${job == "Manager"}'>
+                                <a class="btn-floating btn-large waves-effect waves-light red"
+                                    th:href="@{/main/delete/user/__${user.email}__}"><i
+                                        class="material-icons">close</i></a>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="row">
+            <div class="section">
+                <table class="highlight responsive-table centered">
+                    <thead>
+                        <tr>
+                            <th>
+                                <!-- Imagem -->
+                            </th>
+                            <th>
+                                Descricao-Tarefa
+                            </th>
+                            <th>
+                                Estado-Tarefa
+                            </th>
+                            <th>
+                                DataInicio-Tarefa
+                            </th>
+                            <th>
+                                DeadLine-Tarefa
+                            </th>
+                            <th>
+                                Editar
+                            </th>
+                            <th>
+                                Apagar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each=" task : ${tasks}">
+                            <td>
+
+                            </td>
+                            <td>
+                                <p th:text="${task.descricao}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${task.estadoAtual}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${task.data_inicio}"></p>
+                            </td>
+                            <td>
+                                <p th:text="${task.deadline}"></p>
+                            </td>
+                            <td th:if='${job == "Manager" || job == "Developer"}'>
+                                <a class="btn-floating btn-large waves-effect waves-light red"
+                                    th:href="@{/main/edit/task/__${task.id}__}"><i class="material-icons">create</i></a>
+                            </td>
+                            <td th:if='${job == "Manager"}'>
+                                <a class="btn-floating btn-large waves-effect waves-light red"
+                                    th:href="@{/main/delete/task/__${task.id}__}"><i
+                                        class="material-icons">close</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
     <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
